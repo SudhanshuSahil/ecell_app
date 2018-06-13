@@ -31,10 +31,8 @@ class EventDetail(APIView):
     Retrieve, update or delete a event instance.
     """
     def get_object(self, pk):
-        try:
-            return Event.objects.get(pk=pk)
-        except Event.DoesNotExist:
-            raise Http404
+        return  get_object_or_404(Event.objects.all(), str_id=pk)
+        
 
     def get(self, request, pk, format=None):
         # try:
