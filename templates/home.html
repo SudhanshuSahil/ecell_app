@@ -1,0 +1,41 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.get_username }}!
+  <br>
+	{{ user.first_name }}
+	  <br>
+	{{ user.last_name }}
+	  <br>
+	{{ user.email }}
+	  <br>
+	{{ user.user_permissions }}
+	  <br>
+	{{ user.is_superuser }}
+	  <br>
+  anime : {{user.profile.anime}}
+    <br>
+  about me : {{user.profile.bio}}
+
+  {% comment %} go the the profile url, which is /profile, calls update_profile view, which opens profile.html to 
+  display the form, and while submitting , it updates the profile, and redirects to the home page. {% endcomment %}
+  <p> Complete your profile <a href="{% url 'profile_login:profile' %}">here</a></p>
+
+{% comment %} as i click, it looks for the form, by default in registrations/password_change_form.html. 
+once i submit, it looks for password_change_done.html in registrations. if not found, it opens
+django's  default page.  {% endcomment %}
+  <p><a href="{% url 'password_change' %}">Change password </a></p>
+
+  {% comment %} as i click on logout, it logs me out, looks for logout_redirect_url in settings, redirects to it,
+  or opens the registrations/logged_out.html. there can provide the link for login page again {% endcomment %}
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
+
