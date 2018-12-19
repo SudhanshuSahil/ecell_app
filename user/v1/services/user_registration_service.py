@@ -1,4 +1,3 @@
-import pyotp
 from rest_framework import serializers
 from common.v1 import error_messages
 from user.models import User
