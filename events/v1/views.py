@@ -1,12 +1,12 @@
 from events.models import Event
-from events.serializers import EventSerializer
+from .serializers import EventSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from uuid import UUID
 from django.shortcuts import get_object_or_404
-from .forms import EventForm
+from events.forms import EventForm
 from django.shortcuts import render, redirect
 
 class EventList(APIView):

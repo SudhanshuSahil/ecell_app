@@ -15,12 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
 from rest_framework_swagger.views import get_swagger_view
-from events.views import EventList,EventDetail,addEvent
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-	path('api/events', EventList.as_view(), name = 'event-list'),
-    path('api/events/<pk>', EventDetail.as_view(), name='event-detail'),
-	path('events/add', addEvent, name='event-add'),
+
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include('user.urls')),
+    url(r'^', include('common.urls')),
+    url(r'^', include('events.urls')),
+
+
 ]
+
