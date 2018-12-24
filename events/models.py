@@ -3,6 +3,7 @@ from django.db import models
 from common.v1.utils.helpers import get_url_friendly
 from common.models import LifeTimeTrackingModel, ActiveModel
 
+
 class Event(ActiveModel):
 	id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
@@ -22,6 +23,8 @@ class Event(ActiveModel):
 	# followers = models.ManyToManyField('users.UserProfile', through='UserEventStatus',
 	# 									related_name='followed_events', blank=True)
 	archived = models.BooleanField(default=False)
+
+
 		
 
 	def __str__(self):

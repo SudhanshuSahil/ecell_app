@@ -8,6 +8,8 @@ from uuid import UUID
 from django.shortcuts import get_object_or_404
 from events.forms import EventForm
 from django.shortcuts import render, redirect
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 class EventList(APIView):
     """
@@ -74,4 +76,7 @@ def addEvent(request):
     return render(request, 'addevent.html', {
         'event_form': event_form
     })
-		
+
+class EventCreate(CreateView):
+    model = Event
+    fields = ['name', 'description', 'image_url', 'website_url', 'speaker', 'speaker_image_url', 'speaker_website_url', 'start_time', 'end_time', 'all_day']
