@@ -10,6 +10,9 @@ from events.forms import EventForm
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django import forms
+from user.models import User
+from user.v1.serializers import UserSerializer
 
 class EventList(APIView):
     """
@@ -79,4 +82,46 @@ def addEvent(request):
 
 class EventCreate(CreateView):
     model = Event
-    fields = ['name', 'description', 'image_url', 'website_url', 'speaker', 'speaker_image_url', 'speaker_website_url', 'start_time', 'end_time', 'all_day']
+    start_time = forms.DateTimeField(widget=forms.DateInput(attrs={'class':'timepicker'}))
+    # fields = ['name', 'description', 'image_url', 'website_url', 'speaker', 'speaker_image_url', 'speaker_website_url', 'start_time', 'end_time', 'all_day']
+    fields = '__all__'
+
+class EventType(APIView):
+
+    def get(self, request, event_type):
+        print(event_type)
+        events = Event.objects.filter(event_type=event_type)
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
+
+class MyEvents(APIView):
+
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        my_events = user.user_events.all()
+        serializer = EventSerializer(my_events, many=True)
+        return Response(serializer.data)
+
+class Myeventsinuser(APIView):
+
+
+    def post(self, request):
+        user_id = request.data.get('user_id')
+        myevent = request.data.get('event_id')
+        k = str(user_id)
+        print(k)
+        print(str(myevent))
+        user = User.objects.get(user_id=user_id)
+        print(user.user_name)
+        event = Event.objects.get(event_id=myevent)
+        print(event.name)
+        user.user_events.add(event)
+        user.save()
+        print(str(user.user_events))
+        print('Done')
+        queryset = User.objects.all()
+        serializer = UserSerializer(queryset, many=True)
+        print(serializer.data)
+        # return Response({'result':'added'+event.name+'to' + user.user_name}, status.HTTP_200_OK)
+        return Response(serializer.data)
+

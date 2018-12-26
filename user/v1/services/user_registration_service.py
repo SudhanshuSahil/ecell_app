@@ -107,9 +107,6 @@ class UserRegistartion(object):
             print ("the fetch data failed")
             raise serializers.ValidationError(error_messages.USER_NOT_REGISTERED)
 
-
-
-
         return {
             "user_id": new_user.user_id,
             "secret_key": new_user.secret_key,

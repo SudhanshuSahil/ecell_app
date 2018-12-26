@@ -25,11 +25,9 @@ SECRET_KEY = '2-x1ldrbj7&g5l!sc=#5ys(w-6-^mz3ck471^!=1c2t^i)*o*b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
+
 ALLOWED_HOSTS = ['app.ecell.in', "esummit.ecell.in", "localhost", "127.0.0.1"]
-=======
-ALLOWED_HOSTS = ['app.ecell.in','esummit.ecell.in']
->>>>>>> ee452c55cc13a7bea0a86470c036dadb9ca660e6
+
 
 
 # Application definition
