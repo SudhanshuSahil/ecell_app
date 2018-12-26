@@ -14,10 +14,14 @@ urlpatterns = format_suffix_patterns([
 
     # url(r'^chat/online-users/', include(django_eventstream.urls)
     # , {'channels': ['online-users']}),
-
+    path('api/events/myevent_add', views.Myeventsinuser.as_view(), name='v1_myevent_add'),
+	path('api/events/<event_type>', views.EventType.as_view(), name='event-type'),
+	path('api/events/myevents/<pk>', views.MyEvents.as_view(), name='my-event'),
 	path('api/events', views.EventList.as_view(), name = 'event-list'),
     path('api/events/<pk>', views.EventDetail.as_view(), name='event-detail'),
-	path('events/add', views.EventCreate.as_view(), name='event-add'),
+	# path('events/add', views.EventCreate.as_view(), name='event-add'),
+	path('events/add', views.addEvent, name='event-add'),
+
     # url(r'^chat/api/(?P<chat_id1>[0-9]+)/(?P<chat_id2>[0-9]+)/message/$',
     #     views.Private_room_message.as_view(),
     #     name='private_message'),

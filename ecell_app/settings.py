@@ -26,7 +26,12 @@ SECRET_KEY = '2-x1ldrbj7&g5l!sc=#5ys(w-6-^mz3ck471^!=1c2t^i)*o*b'
 DEBUG = True
 
 
+
 ALLOWED_HOSTS = ['app.ecell.in', "esummit.ecell.in", "localhost", "127.0.0.1"]
+
+
+
+
 
 # Application definition
 

@@ -5,6 +5,8 @@ from django.db import models
 from common.v1.utils.helpers import get_url_friendly
 from common.models import LifeTimeTrackingModel, ActiveModel
 
+from events.models import Event
+
 
 STUDENT = 'student'
 PROFESSIONAL = 'professional'
@@ -30,6 +32,10 @@ class User(ActiveModel):
     # password_hash = models.CharField(max_length=20)
     # secret_key = models.CharField(max_length=16)
     status = models.IntegerField(blank=True, null=True)
+    user_events = models.ManyToManyField(Event, blank=True, default=None, symmetrical=False)
+
+    def __str__(self):
+        return self.user_name
 
     class Meta:
         db_table = 'user'

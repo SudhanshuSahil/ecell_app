@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from user.models import User
 from user.models import Login
 from . services import (user_registration_service, user_session_service,
                         user_session_service, authentication_service)
@@ -70,3 +70,8 @@ class UserLogoutSerializer(serializers.Serializer):
         """
         user_session_service.UserLogout(
             user_id, session_token).perform_tasks()
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
