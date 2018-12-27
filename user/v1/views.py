@@ -18,7 +18,7 @@ class UserRegistration(APIView):
     """
     View for the Registration API.
     """
-    @meta_data_response()
+    # @meta_data_response()
     def post(self, request):
         serializer = serializers.UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
@@ -33,7 +33,7 @@ class UserLogin(APIView):
     View for UserLogin
     """
     # @catch_exception()
-    @meta_data_response()
+    # @meta_data_response()
     def post(self, request):
         serializer = serializers.UserLoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -48,7 +48,7 @@ class UserLogout(APIView):
     """
     View for User Logout
     """
-    @meta_data_response()
+    # @meta_data_response()
     @session_authorize(user_id_key="user_id")
     def post(self, request, auth_data):
         if auth_data.get('authorized'):

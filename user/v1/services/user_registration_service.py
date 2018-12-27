@@ -93,6 +93,8 @@ class UserRegistartion(object):
         """
         data = { "esummit_id": self.esummit_id,
                 "email": self.email}
+        print(data.get('esummit_id'))  
+        print(data.get('email'))        
         r = requests.get('https://ecell.in/esummit/get_user_data.php', params = data)
         fetched_data = r.json()
         print (fetched_data["user_name"])
@@ -107,12 +109,12 @@ class UserRegistartion(object):
             print ("the fetch data failed")
             raise serializers.ValidationError(error_messages.USER_NOT_REGISTERED)
 
-        return {
-            "user_id": new_user.user_id,
-            "secret_key": new_user.secret_key,
-            "email": new_user.email,
-            "user_name": new_user.user_name
-        }
+        # return {
+        #     "user_id": new_user.user_id,
+        #     "secret_key": new_user.secret_key,
+        #     "email": new_user.email,
+        #     "user_name": new_user.user_name
+        # }
     
 
     def _new_user_profile(self, new_user):

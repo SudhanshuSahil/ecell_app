@@ -2,7 +2,7 @@ from uuid import uuid4
 from django.db import models
 from common.v1.utils.helpers import get_url_friendly
 from common.models import LifeTimeTrackingModel, ActiveModel
-
+from venue.models import Venue
 COMPETITIONS = 'competitions'
 NETWORKING = 'networking'
 SPEAKER = 'speaker'
@@ -28,13 +28,15 @@ class Event(ActiveModel):
 	speaker_website_url = models.URLField(blank=True, null=True)
 	date = models.DateTimeField(blank=True, null=True)
 	start_time = models.TimeField(blank=True, null=True)
-	# end_time = models.DateTimeField(blank=True, null=True)
+    
+	venue = models.OneToOneField(Venue,on_delete=models.CASCADE,blank=True,null=True)
+    
 	all_day = models.BooleanField(default=False)
 	# venues = models.ManyToManyField('locations.Location', related_name='events', blank=True)
 	# followers = models.ManyToManyField('users.UserProfile', through='UserEventStatus',
 	# 									related_name='followed_events', blank=True)
 	archived = models.BooleanField(default=False)
-	event_type = models.CharField(max_length=20, default=COMPETITIONS, choices=EVENT_CHOICES)
+	event_type = models.CharField(max_length=200, default=COMPETITIONS, choices=EVENT_CHOICES)
 
 
 		
