@@ -11,7 +11,7 @@ EVENT_CHOICES = (
 	(COMPETITIONS, 'competitions'),
 	(NETWORKING, 'networking'),
 	(SPEAKER, 'speaker'),
-	(OTHERS,'others')
+	(OTHERS, 'others')
 )
 
 class Event(ActiveModel):
