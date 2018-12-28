@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from events.models import Event
+from venue.models import Venue
 
 # class FollowersMethods:
 #     """Helper methods for followers."""
@@ -15,7 +15,7 @@ from events.models import Event
 #         from users.serializers import UserProfileSerializer
 #         return UserProfileSerializer(obj.followers.filter(ues__status=status), many=True).data
 
-class EventSerializer(serializers.ModelSerializer):
+class VenueSerializer(serializers.ModelSerializer):
 	"""Serializer for Event.
 
 	This serializer returns only the count of followers in
@@ -36,7 +36,7 @@ class EventSerializer(serializers.ModelSerializer):
 	# venues = LocationSerializerMin(many=True, read_only=True)
 
 	class Meta:
-		model = Event
+		model = Venue
 		fields = '__all__'
 
 	# fields = ('id', 'str_id', 'name', 'description', 'image_url',
