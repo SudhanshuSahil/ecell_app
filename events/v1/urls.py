@@ -21,6 +21,8 @@ urlpatterns = format_suffix_patterns([
     path('api/events/<pk>', views.EventDetail.as_view(), name='event-detail'),
 	# path('events/add', views.EventCreate.as_view(), name='event-add'),
 	path('events/add', views.addEvent, name='event-add'),
+	path('events/update/<event_id>', views.Eventupdate, name='event-update'),
+	path('events/choices', views.EventChoices, name='event-choices')
 
     # url(r'^chat/api/(?P<chat_id1>[0-9]+)/(?P<chat_id2>[0-9]+)/message/$',
     #     views.Private_room_message.as_view(),

@@ -13,6 +13,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django import forms
 from user.models import User
 from user.v1.serializers import UserSerializer
+from django.contrib import messages
 
 class EventList(APIView):
     """
@@ -125,3 +126,25 @@ class Myeventsinuser(APIView):
         # return Response({'result':'added'+event.name+'to' + user.user_name}, status.HTTP_200_OK)
         return Response(serializer.data)
 
+
+def EventChoices(request):
+    events = Event.objects.all()
+    context = {'events': events}
+    return render(request, 'events/event_choices.html', context)
+
+def Eventupdate(request, event_id):
+    instance = get_object_or_404(Event, event_id=event_id)
+    event_form = EventForm(request.POST or None, instance=instance)
+    print('inside')
+    if event_form.is_valid():
+        print('inside if')
+        instance = event_form.save(commit=False)
+        instance.save()
+        return redirect('event-list')
+    else:
+        messages.error(request, 'Please correct the error below.')
+        pass
+    context = {
+        'event_form': event_form
+    }
+    return render(request, 'addevent.html', context)

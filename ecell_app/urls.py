@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^', include('user.urls')),
     url(r'^', include('common.urls')),
     url(r'^', include('events.urls')),
-
+    url(r'^', include('venue.urls')),
 
 ]
 

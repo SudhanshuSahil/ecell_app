@@ -28,8 +28,8 @@ class Event(ActiveModel):
 	speaker_website_url = models.URLField(blank=True, null=True)
 	date = models.DateTimeField(blank=True, null=True)
 	start_time = models.TimeField(blank=True, null=True)
-    
-	venue = models.OneToOneField(Venue,on_delete=models.CASCADE,blank=True,null=True)
+	# venue = models.OneToOneField(Venue, blank=True, null=True, on_delete=models.CASCADE())
+	venue = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.SET_NULL)
     
 	all_day = models.BooleanField(default=False)
 	# venues = models.ManyToManyField('locations.Location', related_name='events', blank=True)
