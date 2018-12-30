@@ -17,7 +17,7 @@ EVENT_CHOICES = (
 class Event(ActiveModel):
 	# id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 	event_id = models.AutoField(primary_key=True)
-	str_id = models.CharField(max_length=58, editable=False, null=True)    
+	str_id = models.CharField(max_length=58, editable=False, null=True)
 	# time_of_creation = models.DateTimeField(auto_now_add=True)
 	name = models.CharField(max_length=50)
 	description = models.TextField(blank=True)
@@ -37,6 +37,7 @@ class Event(ActiveModel):
 	# 									related_name='followed_events', blank=True)
 	archived = models.BooleanField(default=False)
 	event_type = models.CharField(max_length=200, default=COMPETITIONS, choices=EVENT_CHOICES)
+	updated = models.BooleanField(default=False)
 
 
 		
