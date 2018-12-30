@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
 	'rest_framework',
     'venue',
+    'updates',
     'user.apps.UserConfig',
     'common.apps.CommonConfig',
     'events.apps.EventsConfig',
