@@ -108,23 +108,28 @@ class Myeventsinuser(APIView):
 
     def post(self, request):
         user_id = request.data.get('user_id')
-        myevent = request.data.get('event_id')
+        myevent_id = request.data.get('event_id')
         k = str(user_id)
         print(k)
-        print(str(myevent))
         user = User.objects.get(user_id=user_id)
         print(user.user_name)
-        event = Event.objects.get(event_id=myevent)
+        event = Event.objects.get(event_id=myevent_id)
         print(event.name)
-        user.user_events.add(event)
-        user.save()
-        print(str(user.user_events))
-        print('Done')
-        queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
-        print(serializer.data)
-        # return Response({'result':'added'+event.name+'to' + user.user_name}, status.HTTP_200_OK)
-        return Response(serializer.data)
+        try:
+            myevent = user.user_events.get(event_id=myevent_id)
+            user.user_events.remove(myevent)
+            user.save()
+            return redirect('my-event', pk=user_id)
+        except:
+            user.user_events.add(event)
+            user.save()
+            print(str(user.user_events))
+            print('Done')
+            queryset = User.objects.all()
+            serializer = UserSerializer(queryset, many=True)
+            print(serializer.data)
+            # return Response({'result':'added'+event.name+'to' + user.user_name}, status.HTTP_200_OK)
+            return Response(serializer.data)
 
 
 def EventChoices(request):
@@ -148,3 +153,13 @@ def Eventupdate(request, event_id):
         'event_form': event_form
     }
     return render(request, 'addevent.html', context)
+
+# class Eventdelete(APIView):
+#     def post(self, request):
+#         event_id = request.data.get('event_id')
+#         user_id = request.data.get('user_id')
+#         user = User.objects.get(user_id=user_id)
+#         myevent = Event.objects.get(event_id=event_id)
+#         user.user_events.remove(myevent)
+#         user.save()
+#         return redirect('event-list')
