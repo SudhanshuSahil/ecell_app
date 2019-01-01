@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
 	'rest_framework',
     'venue',
+    'sponsors',
+    'speakers',
     'updates',
     'user.apps.UserConfig',
     'common.apps.CommonConfig',

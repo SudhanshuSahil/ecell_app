@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^', include('events.urls')),
     url(r'^', include('venue.urls')),
     url(r'^', include('updates.urls')),
+    url(r'^', include('sponsors.urls')),
+    url(r'^', include('speakers.urls')),
 
 ]
 

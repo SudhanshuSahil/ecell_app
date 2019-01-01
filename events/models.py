@@ -30,7 +30,8 @@ class Event(ActiveModel):
 	start_time = models.TimeField(blank=True, null=True)
 	# venue = models.OneToOneField(Venue, blank=True, null=True, on_delete=models.CASCADE())
 	venue = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.SET_NULL)
-    
+	venue_name = models.CharField(max_length=500, blank=True, null=True, default=None)
+	venue_url = models.CharField(max_length=500, blank=True, null=True, default=None)
 	all_day = models.BooleanField(default=False)
 	# venues = models.ManyToManyField('locations.Location', related_name='events', blank=True)
 	# followers = models.ManyToManyField('users.UserProfile', through='UserEventStatus',
@@ -45,9 +46,10 @@ class Event(ActiveModel):
 	def __str__(self):
 		return self.name
 
-	# def save(self, *args, **kwargs):
-	# 	self.str_id = get_url_friendly(self.name) + "-" + str(self.id)[:8]
-	# 	super(Event, self).save(*args, **kwargs)
+	def save(self, *args, **kwargs):
+		self.venue_url = self.venue.url
+		self.venue_name = self.venue.name
+		super(Event, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = "Event"
