@@ -26,6 +26,29 @@ class UserRegistrationSerializer(serializers.Serializer):
             "profile": user_profile,
         }
 
+class UserGoogleRegistrationSerializer(serializers.Serializer):
+    """
+    Custom Serializer to validate and create a new user.
+    """
+    user_name = serializers.CharField(required=True)
+    email = serializers.EmailField(required=True)
+    photo_url = serializers.EmailField(required=False)
+    # password = serializers.CharField(
+    #     min_length=6, max_length=60, required=True)
+
+    def save(self, **kwargs):
+        """
+        Creates a login session after creating a new user
+            - Returns a 16 character base32 secret.
+            - Compatible with Google Authenticator and other OTP apps
+        """
+        print("save function called")
+        user_profile = user_registration_service.UserGoogleRegistartion(
+            self.validated_data).register_and_get_user_profile()
+        return {
+            "profile": user_profile,
+        }
+
 
 class AuthenticationSerializer(serializers.Serializer):
     session_token = serializers.CharField(max_length=64)
