@@ -32,7 +32,7 @@ class UserGoogleRegistrationSerializer(serializers.Serializer):
     """
     user_name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
-    photo_url = serializers.EmailField(required=False)
+    photo_url = serializers.URLField(required=False)
     # password = serializers.CharField(
     #     min_length=6, max_length=60, required=True)
 
