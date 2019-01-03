@@ -25,14 +25,15 @@ class User(ActiveModel):
 	# str_id = models.CharField(max_length=58, editable=False, null=True)    
     user_id = models.AutoField(primary_key=True)
     user_name = models.CharField(max_length=40)
-    email = models.CharField(max_length=255, null=True)
-    esummit_id = models.CharField(max_length=255, null=True)
+    email = models.CharField(max_length=255,blank=True, null=True)
+    esummit_id = models.CharField(max_length=255,blank=True, null=True)
     profession = models.CharField(
         max_length=20, default=STUDENT, choices=PROFESSION_CHOICES)
     # password_hash = models.CharField(max_length=20)
     # secret_key = models.CharField(max_length=16)
     status = models.IntegerField(blank=True, null=True)
     user_events = models.ManyToManyField(Event, blank=True, default=None, symmetrical=False)
+    photo_url = models.URLField(blank=True, null=True, default=None)
 
     def __str__(self):
         return self.user_name

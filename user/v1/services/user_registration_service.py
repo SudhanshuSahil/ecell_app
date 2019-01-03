@@ -135,3 +135,50 @@ class UserRegistartion(object):
             new_user = self._register_user()
         user_profile = self._new_user_profile(new_user)
         return user_profile
+
+class UserGoogleRegistartion(object):
+    """
+    user registeration service
+    """
+
+    def __init__(self, user_data):
+        self.user_name = user_data.get('user_name')
+        self.email = user_data.get('email')
+        self.photo_url = user_data.get('photo_url')
+       
+    def _register_user(self):
+        """
+        Registers the User.
+        """
+        print("making new user")
+
+        new_user = User.objects.create(
+            user_name=self.user_name,
+            email=self.email,
+            photo_url=self.photo_url
+        )
+        
+        new_user.save()
+        # print("new user made: " + new_user)
+        return new_user
+
+    def _new_user_profile(self, new_user):
+        return {
+            "user_id": new_user.user_id,
+            "esummit_id": new_user.esummit_id,
+            "email": new_user.email,
+            "photo_url": new_user.photo_url,
+            "user_name": new_user.user_name
+        }
+
+    def register_and_get_user_profile(self):
+        """
+        if user already exists, return its profile. else register a new user and return. 
+        """
+        new_user = User.objects.filter(
+            user_name=self.user_name, email=self.email).first()
+        if new_user is None:
+            new_user = self._register_user()
+        user_profile = self._new_user_profile(new_user)
+        print (user_profile)
+        return user_profile

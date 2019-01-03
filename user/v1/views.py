@@ -20,8 +20,25 @@ class UserRegistration(APIView):
     """
     # @meta_data_response()
     def post(self, request):
+        print("inside wrong function")
         serializer = serializers.UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
+            session_data = serializer.save()
+            return Response(session_data, status=status.HTTP_200_OK)
+        return Response({'error': error_wrapper(serializer.errors)},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserGoogleRegistration(APIView):
+    """
+    View for the Registration API.
+    """
+    # @meta_data_response()
+    def post(self, request):
+        serializer = serializers.UserGoogleRegistrationSerializer(data=request.data)
+        print("inside correct function")
+        if serializer.is_valid():
+            print("data is valid")
             session_data = serializer.save()
             return Response(session_data, status=status.HTTP_200_OK)
         return Response({'error': error_wrapper(serializer.errors)},
