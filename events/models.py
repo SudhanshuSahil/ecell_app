@@ -41,7 +41,7 @@ class Event(ActiveModel):
 	archived = models.BooleanField(default=False)
 	event_type = models.CharField(max_length=200, default=COMPETITIONS, choices=EVENT_CHOICES)
 	updated = models.BooleanField(default=False)
-	# people_going = models.IntegerField(blank=True, null=True, default=None, editable=False)
+
 
 
 		
@@ -52,7 +52,6 @@ class Event(ActiveModel):
 	def save(self, *args, **kwargs):
 		self.venue_url = self.venue.url
 		self.venue_name = self.venue.name
-		# self.people_going = self.user_set.all().count()
 		super(Event, self).save(*args, **kwargs)
 
 	class Meta:
