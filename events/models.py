@@ -3,6 +3,8 @@ from django.db import models
 from common.v1.utils.helpers import get_url_friendly
 from common.models import LifeTimeTrackingModel, ActiveModel
 from venue.models import Venue
+# from user.models import User
+
 COMPETITIONS = 'competitions'
 NETWORKING = 'networking'
 SPEAKER = 'speaker'
@@ -30,8 +32,8 @@ class Event(ActiveModel):
 	start_time = models.TimeField(blank=True, null=True)
 	# venue = models.OneToOneField(Venue, blank=True, null=True, on_delete=models.CASCADE())
 	venue = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.SET_NULL)
-	venue_name = models.CharField(max_length=500, blank=True, null=True, default=None)
-	venue_url = models.CharField(max_length=500, blank=True, null=True, default=None)
+	venue_name = models.CharField(max_length=500, blank=True, null=True, default=None, editable=False)
+	venue_url = models.CharField(max_length=500, blank=True, null=True, default=None, editable=False)
 	all_day = models.BooleanField(default=False)
 	# venues = models.ManyToManyField('locations.Location', related_name='events', blank=True)
 	# followers = models.ManyToManyField('users.UserProfile', through='UserEventStatus',
@@ -39,6 +41,7 @@ class Event(ActiveModel):
 	archived = models.BooleanField(default=False)
 	event_type = models.CharField(max_length=200, default=COMPETITIONS, choices=EVENT_CHOICES)
 	updated = models.BooleanField(default=False)
+	# people_going = models.IntegerField(blank=True, null=True, default=None, editable=False)
 
 
 		
@@ -49,6 +52,7 @@ class Event(ActiveModel):
 	def save(self, *args, **kwargs):
 		self.venue_url = self.venue.url
 		self.venue_name = self.venue.name
+		# self.people_going = self.user_set.all().count()
 		super(Event, self).save(*args, **kwargs)
 
 	class Meta:

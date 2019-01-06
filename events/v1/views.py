@@ -154,6 +154,15 @@ def Eventupdate(request, event_id):
     }
     return render(request, 'addevent.html', context)
 
+# class Peoplegoing(APIView):
+#
+#
+#     def post(self, request):
+#         event_id = request.data.get('event_id')
+#         event = Event.objects.get(event_id=event_id)
+#         likes = event.user_set.all().count()
+#         return Response({'people_going': likes}, status.HTTP_200_OK)
+
 # class Eventdelete(APIView):
 #     def post(self, request):
 #         event_id = request.data.get('event_id')
@@ -163,3 +172,22 @@ def Eventupdate(request, event_id):
 #         user.user_events.remove(myevent)
 #         user.save()
 #         return redirect('event-list')
+class Peoplegoing(APIView):
+
+
+    def post(self, request):
+        # events = Event.objects.all()
+        # arr = {'event_id': 'likes'}
+        # for event in events:
+        #     likes = event.user_set.all().count()
+        #     id = str(event.event_id)
+        #     likes=str(likes)
+        #     arr[id] = likes
+        # return Response(arr)
+        event_id = request.data.get('event_id')
+        event = Event.objects.get(event_id=event_id)
+        likes = event.user_set.all().count()
+        return Response({'people_going': likes})
+
+
+

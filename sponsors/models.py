@@ -5,8 +5,8 @@ from common.models import LifeTimeTrackingModel, ActiveModel
 # Create your models here.
 class Sponsor(ActiveModel):
     name = models.CharField(max_length=200, blank=True, null=True, default=None)
-    link = models.URLField(blank=True, null=True, default=None)
-    photo = models.URLField(blank=True, null=True, default=None)
+    website_link = models.URLField(blank=True, null=True, default=None)
+    photo_url = models.URLField(blank=True, null=True, default=None)
     category = models.CharField(max_length=200,blank=True, null=True, default=None)
 
     class Meta:
