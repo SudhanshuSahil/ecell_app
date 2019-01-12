@@ -119,8 +119,10 @@ class Myeventsinuser(APIView):
             myevent = user.user_events.get(event_id=myevent_id)
             user.user_events.remove(myevent)
             user.save()
-            return redirect('my-event', pk=user_id)
+            # return redirect('my-event', pk=user_id)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         except:
+
             user.user_events.add(event)
             user.save()
             print(str(user.user_events))
@@ -129,7 +131,9 @@ class Myeventsinuser(APIView):
             serializer = UserSerializer(queryset, many=True)
             print(serializer.data)
             # return Response({'result':'added'+event.name+'to' + user.user_name}, status.HTTP_200_OK)
-            return Response(serializer.data)
+            # return Response(serializer.data)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 def EventChoices(request):
