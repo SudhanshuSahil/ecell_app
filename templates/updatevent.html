@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Add Event</h2>
+<form method="post">
+	{% csrf_token %} {% for field in event_form %}
+	<p>
+		{{ field.label_tag }}
+		<br> {{ field }} {% if field.help_text %}
+		<small style="color: grey">{{ field.help_text }}</small>
+		{% endif %} {% for error in field.errors %}
+		<p style="color: red">{{ error }}</p>
+		{% endfor %}
+	</p>
+	{% endfor %}
+	<button type="submit">Add Event</button>
+    <!--<a href="{% url 'event-delete' event_id=event_id %}" >Delete this event</a>-->
+</form>
+<a href="{% url 'event-delete' event_id=event_id %}" ><button><span>Delete this event</span></button></a>
+{% endblock %}

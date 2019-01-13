@@ -14,6 +14,7 @@ urlpatterns = format_suffix_patterns([
 
     # url(r'^chat/online-users/', include(django_eventstream.urls)
     # , {'channels': ['online-users']}),
+	path('events/delete/<event_id>', views.DeleteEvent, name='event-delete'),
 	path('api/events/likes', views.Peoplegoing.as_view(), name='event-likes'),
     path('api/events/myevent_add', views.Myeventsinuser.as_view(), name='v1_myevent_add'),
 	path('api/events/<event_type>', views.EventType.as_view(), name='event-type'),

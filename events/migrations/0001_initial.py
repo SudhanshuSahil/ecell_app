@@ -40,13 +40,10 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Event',
-<<<<<<< HEAD
-                'ordering': ('-created_at',),
-                'verbose_name_plural': 'Events',
-=======
+
                 'verbose_name_plural': 'Events',
                 'ordering': ('-created_at',),
->>>>>>> 69c073676be5ee65a443c660c7ec3299e01c0ad1
+
             },
         ),
     ]

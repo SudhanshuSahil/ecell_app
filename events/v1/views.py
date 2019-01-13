@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from uuid import UUID
 from django.shortcuts import get_object_or_404
-from events.forms import EventForm
+from events.forms import EventForm, EventUpdateForm
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -119,8 +119,8 @@ class Myeventsinuser(APIView):
             myevent = user.user_events.get(event_id=myevent_id)
             user.user_events.remove(myevent)
             user.save()
-            # return redirect('my-event', pk=user_id)
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return redirect('my-event', pk=user_id)
+            # return Response(status=status.HTTP_204_NO_CONTENT)
         except:
 
             user.user_events.add(event)
@@ -131,8 +131,8 @@ class Myeventsinuser(APIView):
             serializer = UserSerializer(queryset, many=True)
             print(serializer.data)
             # return Response({'result':'added'+event.name+'to' + user.user_name}, status.HTTP_200_OK)
-            # return Response(serializer.data)
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(serializer.data)
+            # return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -143,7 +143,7 @@ def EventChoices(request):
 
 def Eventupdate(request, event_id):
     instance = get_object_or_404(Event, event_id=event_id)
-    event_form = EventForm(request.POST or None, instance=instance)
+    event_form = EventUpdateForm(request.POST or None, instance=instance)
     print('inside')
     if event_form.is_valid():
         print('inside if')
@@ -154,9 +154,10 @@ def Eventupdate(request, event_id):
         messages.error(request, 'Please correct the error below.')
         pass
     context = {
-        'event_form': event_form
+        'event_form': event_form,
+        'event_id': event_id
     }
-    return render(request, 'addevent.html', context)
+    return render(request, 'updatevent.html', context)
 
 # class Peoplegoing(APIView):
 #
@@ -193,5 +194,11 @@ class Peoplegoing(APIView):
         likes = event.user_set.all().count()
         return Response({'people_going': likes})
 
+
+def DeleteEvent(request, event_id):
+    print('inside delete')
+    event = Event.objects.get(event_id=event_id)
+    event.delete()
+    return redirect('event-list')
 
 

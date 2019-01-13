@@ -15,6 +15,13 @@ EVENT_CHOICES = (
 	(SPEAKER, 'speaker'),
 	(OTHERS, 'others')
 )
+DAY1 = 'day1'
+DAY2 = 'day2'
+DAY_CHOICES = (
+	(DAY1, 'day1'),
+	(DAY2, 'day2'),
+
+)
 
 class Event(ActiveModel):
 	# id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
@@ -28,7 +35,8 @@ class Event(ActiveModel):
 	speaker = models.CharField(max_length=50, blank=True, null=True)
 	speaker_image_url = models.URLField(blank=True, null=True)
 	speaker_website_url = models.URLField(blank=True, null=True)
-	date = models.DateTimeField(blank=True, null=True)
+	# date = models.DateTimeField(blank=True, null=True)
+	day = models.CharField(max_length=200, default=DAY1, choices=DAY_CHOICES)
 	start_time = models.TimeField(blank=True, null=True)
 	# venue = models.OneToOneField(Venue, blank=True, null=True, on_delete=models.CASCADE())
 	venue = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.SET_NULL)
@@ -41,6 +49,8 @@ class Event(ActiveModel):
 	archived = models.BooleanField(default=False)
 	event_type = models.CharField(max_length=200, default=COMPETITIONS, choices=EVENT_CHOICES)
 	updated = models.BooleanField(default=False)
+	highlight = models.BooleanField(default=False)
+
 
 
 
