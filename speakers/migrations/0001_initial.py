@@ -27,13 +27,10 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Speaker',
-<<<<<<< HEAD
-                'ordering': ('-created_at',),
-                'verbose_name_plural': 'Speaker',
-=======
+
                 'verbose_name_plural': 'Speaker',
                 'ordering': ('-created_at',),
->>>>>>> 69c073676be5ee65a443c660c7ec3299e01c0ad1
+
             },
         ),
     ]
