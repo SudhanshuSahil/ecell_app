@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'sponsors',
     'speakers',
     'updates',
+    'feedback',
     'user.apps.UserConfig',
     'common.apps.CommonConfig',
     'events.apps.EventsConfig',

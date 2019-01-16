@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^', include('updates.urls')),
     url(r'^', include('sponsors.urls')),
     url(r'^', include('speakers.urls')),
+    url(r'^', include('feedback.urls')),
 
 ]
 
