@@ -67,7 +67,7 @@ class Event(ActiveModel):
 	class Meta:
 		verbose_name = "Event"
 		verbose_name_plural = "Events"
-		ordering = ("-created_at",)	
+		ordering = ('start_time',)
 
 # class UserEventStatus(models.Model):
 #     """Associates a User and an Event, describing probabilty of attending.
