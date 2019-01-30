@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^', include('sponsors.urls')),
     url(r'^', include('speakers.urls')),
     url(r'^', include('feedback.urls')),
+    url(r'^', include('friends.urls')),
+    url(r'^', include('chats.urls')),
 
 ]
 
