@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'speakers',
     'updates',
     'feedback',
+    'friends',
+    'chats',
     'user.apps.UserConfig',
     'common.apps.CommonConfig',
     'events.apps.EventsConfig',
